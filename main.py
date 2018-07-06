@@ -25,10 +25,10 @@ def recog(image):
     print(recognized_faces)
 
 
-def remo(id):
-    '''Take one argument, id=subject_id to be deleted'''
+def remo(id,gname):
+    '''Takes two arguments,gname=gallery_name from where to be deleted and id=subject_id to be deleted'''
     #passing subject_id to be deleted and gallery_name from where it will be deleted.
-    kf.remove_face(subject_id=id, gallery_name='test')
+    kf.remove_face(subject_id=id, gallery_name=gname)
 
 def remog(gname):
     '''Takes argument gname=gallery_name to be deleted'''
@@ -69,7 +69,10 @@ while True:
         auth()
         galldet()
     if n==4:
-        pass
+        gname = str(input("Enter the gallery name from which you want to delete: "))
+        id = str(input("Enter the subject_id you want to delete: "))
+        auth()
+        remo(id,gname)
     if n==5:
         auth()
         remog()
