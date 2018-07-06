@@ -1,9 +1,8 @@
 import kairos_face as kf
 
-def auth():
-    #kairos api id and key
-    kf.settings.app_id = ''
-    kf.settings.app_key = ''
+#kairos api id and key
+kf.settings.app_id = ''
+kf.settings.app_key = ''
 
 
 def enroll(image,id,gname):
@@ -46,35 +45,3 @@ def galldet():
         gallery = kf.get_gallery_object(gallery_name)
         print('Gallery name: {}'.format(gallery.name))
         print('Gallery subjects: {}'.format(gallery.subjects))
-
-
-
-while True:
-    n=int(input("\n1.) Enroll a face\n2.) Recognize a face\n3.)Get gallery details\n4.)Remove a subject\n5.)Remove a galery\n6.)Exit\n"))
-    if n==1:
-        #directory where all the faces are present
-        dir='faces/'
-        #enrolling every face present in the directory
-        for i in range(1,9):
-            fn = dir+str(i)+'.jpg'
-            id = str(input("Subject id: "))
-            # gname = str(input("Gallery Name: "))
-            auth()
-            enroll(fn,id,gname = 'test')
-    if n==2:
-        auth()
-        fn = 'ja.jpg'
-        recog(fn)
-    if n==3:
-        auth()
-        galldet()
-    if n==4:
-        gname = str(input("Enter the gallery name from which you want to delete: "))
-        id = str(input("Enter the subject_id you want to delete: "))
-        auth()
-        remo(id,gname)
-    if n==5:
-        auth()
-        remog()
-    if n==6:
-        quit()
