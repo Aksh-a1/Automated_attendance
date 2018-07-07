@@ -6,7 +6,7 @@ def cam():
 
     cap = cv2.VideoCapture(0)
 
-    face_c=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+    face_c=cv2.CascadeClassifier("/usr/local/lib/python3.5/dist-packages/cv2/data/haarcascade_frontalface_alt.xml")
 
     while cap.isOpened():
         status,frame = cap.read()
@@ -19,25 +19,22 @@ def cam():
 
         cv2.imshow('webcam',frame)
 
-
+        key = cv2.waitKey(1) & 0b11111111   #0b11111111 is 0xFF
         #click c to capture image
-        if cv2.waitKey(1) & 0xFF == ord('c'):
-         if len(face)>1:
+        if key == ord('c'):
+            if len(face)>1:
                 print("Too many faces")
-         elif len(face)==0:
+            elif len(face)==0:
                 print("No faces to capture")
-         else:
+            else:
                 print("Successfully captured")
-               img = cv2.imread('face.jpg',1)
+                img = cv2.imread('face.jpg',1)
                 cv2.imshow('photo',img)
                 # attendence() # call this function to mark attendence
                 continue
-        
-
-    #click q to quit
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        elif key == ord('q'):
             break
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
     cv2.destroyAllWindows()
     cap.release()
 
