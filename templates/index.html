@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <title>Automated Attendance</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
@@ -55,18 +56,18 @@
   <h1>AUTOMATED ATTENDANCE</h1>
   <br><br><br><br><br><br>
 
-  <a href='register.html'>
+  <a href='http://localhost:5000/register'>
     <div class="card card-1">
       <br><br>
-      <img src="register.png" height="300px" width="300px" alt="register.png">
+      <img src="{{ url_for('static', filename='register.png') }}" height="300px" width="300px" alt="register.png">
       <br>
       <h2>Register</h2>
     </div>
   </a>
-  <a href="login.html">
+  <a href="http://localhost:5000/register">
     <div class="card card-2">
       <br><br>
-      <img src="attendance.png" height="300px" width="300px" alt="attendance.png">
+      <img src="{{ url_for('static', filename='attendance.png') }}" height="300px" width="300px" alt="attendance.png">
       <br>
       <h2>Attendance</h2>
     </div>
@@ -74,7 +75,7 @@
   <a href="sum.html">
     <div class="card card-3">
       <br><br>
-      <img src="attreg.png" height="300px" width="300px" alt="attreg.png">
+      <img src="{{ url_for('static', filename='attreg.png') }}" height="300px" width="300px" alt="attreg.png">
       <br>
       <h2>Summary</h2>
     </div>
