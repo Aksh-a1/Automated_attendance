@@ -52,7 +52,7 @@
         let formdata = new FormData();
         formdata.append("image", file);
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://attendance.localtunnel.me/image', true);
+        xhr.open('POST', 'http://atten.localtunnel.me/image', true);
         xhr.onload = function () {
             if (this.status === 200)
                 console.log(this.response);
