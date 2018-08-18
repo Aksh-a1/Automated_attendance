@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Post an Image test
+  </title>
+  <style>
+  .b{
+    border-style: solid;
+    border-width: medium;
+    border-radius: 5px
+  }
+  </style>
+</head>
+
+
+
+<body>
+  <div>
+    <h2>Click your photo</h2>
+  </div>
+  <div>
+    <video class='b' id="myVideo" autoplay></video>
+  </div>
+  <div>
+    <input type="button" value="click" onclick="cap();">Capture</input>
+  </div>
+</body>
+
+
+
+<script>
+
+    let v = document.getElementById("myVideo");
+
+    //create a canvas to grab an image for upload
+    let imageCanvas = document.createElement('canvas');
+    let imageCtx = imageCanvas.getContext("2d");
+
+    //Add file blob to a form and post
+    function postFile(file) {
+        let formdata = new FormData();
+        formdata.append("image", file);
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:5000/image', true);
+        xhr.onload = function () {
+            if (this.status === 200)
+                console.log(this.response);
+            else
+                console.error(xhr);
+        };
+        xhr.send(formdata);
+    }
+
+    //Get the image from the canvas
+    function sendImagefromCanvas() {
+
+        //Make sure the canvas is set to the current video size
+        imageCanvas.width = v.videoWidth;
+        imageCanvas.height = v.videoHeight;
+
+        imageCtx.drawImage(v, 0, 0, v.videoWidth, v.videoHeight);
+
+        //Convert the canvas to blob and post the file
+        imageCanvas.toBlob(postFile, 'image/jpeg');
+    }
+
+    //Take a picture on click
+    v.onclick = function() {
+        console.log('click');
+        sendImagefromCanvas();
+    };
+
+    window.onload = function () {
+
+        //Get camera video
+        navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720}, audio: false})
+            .then(stream => {
+                v.srcObject = stream;
+            })
+            .catch(err => {
+                console.log('navigator.getUserMedia error: ', err)
+            });
+
+    };
+
+</script>
+</html>
