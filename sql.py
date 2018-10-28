@@ -14,6 +14,8 @@ mark_atten = ("INSERT INTO atten "
             "(id, date) "
             "VALUES (%s, %s)")
 
+summ = ("SELECT * FROM atten")
+
 def regist(formd,img):        #form data in dictionary form and image
 
     try:
@@ -26,10 +28,12 @@ def regist(formd,img):        #form data in dictionary form and image
         cursor = cnx.cursor()
         cursor.execute(add_stud, data)
         id=str(cursor.lastrowid)
+        print("-----------------------",img)
         fil=str(dir)+"/"+str(img)
+        print("-----------------------",fil)
         gal='student'
         print("-------",id,"--------")
-        kairo.enroll(fil,id,gname = 'student')
+        kairo.enroll(fil,id,gname = 'test')
         cnx.commit()
         cursor.close()
         cnx.close()
@@ -50,8 +54,9 @@ def atten(im):                 #getting image and marking attendance
         cnx = mysql.connector.connect(user='dat', password='Qwerty,12',
                                     host='127.0.0.1',
                                     database='employees')
-
+        print("-----------------------",im)
         fil=str(dir)+"/"+str(im)
+        print("-----------------------",fil)
         result = kairo.recog(fil)
         if (str(result['images'][0]['transaction']['status']) == 'failure'):
             print(result)
@@ -80,6 +85,33 @@ def atten(im):                 #getting image and marking attendance
 
     return 1
 
+
+def summary():
+    try:
+        cnx = mysql.connector.connect(user='dat', password='Qwerty,12',
+                                    host='127.0.0.1',
+                                    database='employees')
+
+        cursor = cnx.cursor()
+        cursor.execute(summ)
+        result = dict(cursor)
+
+        print('####',result)
+        cursor.close()
+        cnx.close()
+        return result
+
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+            return 0
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+            return 0
+        else:
+            print(err)
+            return 0
+    return
 
 # cnx = mysql.connector.connect(user='dat', password='Qwerty,12',
 #                               host='127.0.0.1',

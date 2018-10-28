@@ -1,8 +1,8 @@
 import kairos_face as kf
 
 #kairos api id and key
-kf.settings.app_id = '22feceff'
-kf.settings.app_key = '76c3dcdbb5c93432712f448c4b940c77'
+kf.settings.app_id = ''
+kf.settings.app_key = ''
 
 
 def enroll(image,id,gname):
@@ -20,7 +20,7 @@ def recog(image):
     # recognized_faces = kf.recognize_face(url='', gallery_name='test')
     # Recognizing from a file
     #passing image_path of the image which is to be recognized, gallery _name: to search in which gallery, threshold: confidence value, only give success result for match above this level
-    recognized_faces = kf.recognize_face(file=image, gallery_name='student', additional_arguments={"threshold":"0.50"})
+    recognized_faces = kf.recognize_face(file=image, gallery_name='test', additional_arguments={"threshold":"0.20"})
     return recognized_faces
 
 
