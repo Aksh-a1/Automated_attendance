@@ -14,7 +14,7 @@ mark_atten = ("INSERT INTO atten "
             "(id, date) "
             "VALUES (%s, %s)")
 
-summ = ("SELECT * FROM atten")
+summ = ("SELECT a.id, CONCAT(s.first_name,' ', s.last_name), a.date FROM atten AS a INNER JOIN stud AS s ON a.id=s.id ")
 
 def regist(formd,img):        #form data in dictionary form and image
 
@@ -94,7 +94,7 @@ def summary():
 
         cursor = cnx.cursor()
         cursor.execute(summ)
-        result = dict(cursor)
+        result = list(cursor)
 
         print('####',result)
         cursor.close()

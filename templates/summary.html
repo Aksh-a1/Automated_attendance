@@ -6,13 +6,15 @@
        <table border = 1>
          <tr>
            <th>ID</th>
+           <th>NAME</th>
            <th>DATE</th>
          </tr>
-         {% for key, value in summary.items() %}
+         {% for value1, value2, value3 in summary %}
 
             <tr>
-               <td> {{ key }} </td>
-               <td> {{ value }} </td>
+               <td> {{ value1 }} </td>
+               <td> {{ value2 }} </td>
+               <td> {{ value3 }} </td>
             </tr>
 
          {% endfor %}
